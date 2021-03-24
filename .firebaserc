@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "sample-todo-app-7ad0b",
+    "dev": "sample-todo-app-7ad0b",
+    "prod": "sample-todo-app-7ad0b"
+  }
+}
