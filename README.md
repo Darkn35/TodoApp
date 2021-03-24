@@ -29,3 +29,6 @@ or the production build (uses .env.production)
 ```
 npm run build:prod
 ```
+
+### For more questions, please refer to this web article or ask me!
+https://victorbruce82.medium.com/how-to-deploy-a-react-app-to-different-firebase-hosting-environments-dev-and-prod-da3f4cae9a1e
