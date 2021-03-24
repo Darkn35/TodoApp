@@ -14,6 +14,12 @@ REACT_APP_STORAGE_BUCKET="content"
 REACT_APP_MESSAGING_SENDER_ID="content"
 REACT_APP_APP_ID="content"
 ```
+## To run on localhost:3000
+run the webapp using this command
+```
+npm run start:dev
+```
+
 ## To run on the webhost provided by Firebase
 run either the development build (uses .env.development)
 ```
