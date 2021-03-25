@@ -9,6 +9,8 @@ import './styles.scss';
 export default function Todos(props) {
     const [modalEdit, setModalEdit] = useState(false);
     const [modalDone, setModalDone] = useState(false);
+    const [modalConfirmDel, setModalConfirmDel] = useState(false);
+    const [modalConfirmDone, setModalConfirmDone] = useState(false);
     const [done, setDone] = useState(false);
     const [input, setInput] = useState('');
     const [message, setMessage] = useState('');
@@ -20,9 +22,12 @@ export default function Todos(props) {
 
     const toggleEdit = () => setModalEdit(!modalEdit);
     const toggleDone = () => setModalDone(!modalDone);
+    const toggleConfirmDel = () => setModalConfirmDel(!modalConfirmDel);
+    const toggleConfirmDone = () => setModalConfirmDone(!modalConfirmDone);
 
     const deleteHandler = () => {
         db.collection('TodoCollection').doc(props.todo.id).delete()
+        toggleConfirmDel();
     }
 
     const editTodo = () => {
@@ -35,6 +40,7 @@ export default function Todos(props) {
     const doneHandler = () => {
         setDone(!done);
         setMessage('');
+        toggleConfirmDone()
         if (!done)
         {
             // Task is Done
@@ -97,7 +103,9 @@ export default function Todos(props) {
                     <Button color="secondary" onClick={toggleEdit}>Cancel</Button>
                 </ModalFooter>
             </Modal>
+
             {/* Done Checker Modal */}
+
             <Modal isOpen={modalDone} toggle={toggleDone}>
                 <ModalHeader toggle={toggleDone}>Todo Progress</ModalHeader>
                 <ModalBody>
@@ -107,6 +115,32 @@ export default function Todos(props) {
                     <Button color="primary" onClick={toggleDone}>Okay</Button>
                 </ModalFooter>
             </Modal>
+
+            {/* Delete Confirmation Modal */}
+
+            <Modal isOpen={modalConfirmDel} toggle={toggleConfirmDel}>
+                <ModalHeader toggle={toggleConfirmDel}>Confirmation</ModalHeader>
+                <ModalBody>
+                    <text>Are you sure you want to delete this task?</text>
+                </ModalBody>
+                <ModalFooter>
+                    <Button color="primary" onClick={deleteHandler}>Yes</Button>
+                    <Button color="danger" onClick={toggleConfirmDel}>No</Button>
+                </ModalFooter>
+            </Modal>
+
+            {/* Done Confirmation Modal */}
+
+            <Modal isOpen={modalConfirmDone} toggle={toggleConfirmDone}>
+                <ModalHeader toggle={toggleConfirmDone}>Confirmation</ModalHeader>
+                <ModalBody>
+                    <text>Are you sure you want to mark this task as done?</text>
+                </ModalBody>
+                <ModalFooter>
+                    <Button color="primary" onClick={doneHandler}>Yes</Button>
+                    <Button color="danger" onClick={toggleConfirmDone}>No</Button>
+                </ModalFooter>
+            </Modal>
             <ListGroup>
                 <Row>
                     <Col className="col-10 mb-3">
@@ -114,9 +148,9 @@ export default function Todos(props) {
                     </Col>
                     <Col className="col-2 pt-1">
                         <Row>
-                            <Button color="danger" onClick={deleteHandler} className="button-alignment"> <Trash2 /> </Button>
+                            <Button color="danger" onClick={toggleConfirmDel} className="button-alignment"> <Trash2 /> </Button>
                             <Button color="primary" onClick={toggleEdit}> <Edit /> </Button>
-                            <Button color="success" onClick={doneHandler}> <CheckSquare /> </Button>
+                            <Button color="success" onClick={toggleConfirmDone}> <CheckSquare /> </Button>
                         </Row>
                     </Col>
                 </Row>
