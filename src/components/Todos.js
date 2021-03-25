@@ -146,11 +146,11 @@ export default function Todos(props) {
             
             <ListGroup>
                 <Row>
-                    <Col className="col-10 mb-3 col-s-10">
+                    <Col className="col-md-10 mb-3 col-s-9 col-xs-10 custom-content-style">
                         <ListGroupItem onClick={toggleDone} className="task-style"><Badge color={badgeColor}>{badgeMessage}</Badge> | {props.todo.todo} </ListGroupItem>
                     </Col>
-                    <Col className="col-2 pt-1 col-custom-style col-s-2">
-                        <Row >
+                    <Col className="col-md-2 pt-1 pb-1 col-s-3 col-xs-2 custom-row-style">
+                        <Row>
                             <Button color="danger" onClick={toggleConfirmDel} className="button-alignment"> <Trash2 /> </Button>
                             <Button color="primary" onClick={toggleEdit} className="button-alignment"> <Edit /> </Button>
                             <Button color="success" onClick={toggleConfirmDone} className="button-alignment"> <CheckSquare /> </Button>
