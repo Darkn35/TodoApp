@@ -141,16 +141,19 @@ export default function Todos(props) {
                     <Button color="danger" onClick={toggleConfirmDone}>No</Button>
                 </ModalFooter>
             </Modal>
+
+            {/* List of To-dos */}
+            
             <ListGroup>
                 <Row>
-                    <Col className="col-10 mb-3">
-                        <ListGroupItem onClick={toggleDone} ><Badge color={badgeColor}>{badgeMessage}</Badge> | {props.todo.todo} </ListGroupItem>
+                    <Col className="col-10 mb-3 col-s-10">
+                        <ListGroupItem onClick={toggleDone} className="task-style"><Badge color={badgeColor}>{badgeMessage}</Badge> | {props.todo.todo} </ListGroupItem>
                     </Col>
-                    <Col className="col-2 pt-1">
-                        <Row>
+                    <Col className="col-2 pt-1 col-custom-style col-s-2">
+                        <Row >
                             <Button color="danger" onClick={toggleConfirmDel} className="button-alignment"> <Trash2 /> </Button>
-                            <Button color="primary" onClick={toggleEdit}> <Edit /> </Button>
-                            <Button color="success" onClick={toggleConfirmDone}> <CheckSquare /> </Button>
+                            <Button color="primary" onClick={toggleEdit} className="button-alignment"> <Edit /> </Button>
+                            <Button color="success" onClick={toggleConfirmDone} className="button-alignment"> <CheckSquare /> </Button>
                         </Row>
                     </Col>
                 </Row>
