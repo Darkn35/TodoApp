@@ -16,6 +16,7 @@ export default function Todos(props) {
     const [message, setMessage] = useState('');
     const [badgeMessage, setBadgeMessage] = useState('');
     const [badgeColor, setBadgeColor] = useState('primary');
+    const [confirmMessage, setConfirmMessage] = useState('');
 
     const timestamp = new Date (props.todo.timestamp).toDateString() + ' at ' + new Date (props.todo.timestamp).toLocaleTimeString();
     const timestampDone = new Date (props.todo.timestampDone).toDateString() + ' at ' + new Date (props.todo.timestampDone).toLocaleTimeString();
@@ -51,6 +52,7 @@ export default function Todos(props) {
             }, { merge: true });
 
             setMessage( `This task was done on ` + timestampDone);
+            setConfirmMessage("Are you sure you want to mark this task as done?");
             setBadgeMessage("Done");
             setBadgeColor("success");
         }
@@ -64,6 +66,7 @@ export default function Todos(props) {
             }, { merge: true });
 
             setMessage(`This task was created on ` + timestamp);
+            setConfirmMessage("Are you sure you want to mark this task as not done?");
             setBadgeMessage("Pending");
             setBadgeColor("primary");
         }
@@ -75,11 +78,13 @@ export default function Todos(props) {
             {
                 case true: 
                     setMessage( `This task was done on ` + timestampDone);
+                    setConfirmMessage("Are you sure you want to mark this task as not done?");
                     setBadgeMessage("Done");
                     setBadgeColor("success");
                 break;
                 case false: 
                     setMessage(`This task was created on ` + timestamp);
+                    setConfirmMessage("Are you sure you want to mark this task as done?");
                     setBadgeMessage("Pending");
                     setBadgeColor("primary");
                 break;
@@ -134,7 +139,7 @@ export default function Todos(props) {
             <Modal isOpen={modalConfirmDone} toggle={toggleConfirmDone}>
                 <ModalHeader toggle={toggleConfirmDone}>Confirmation</ModalHeader>
                 <ModalBody>
-                    <text>Are you sure you want to mark this task as done?</text>
+                    <text>{confirmMessage}</text>
                 </ModalBody>
                 <ModalFooter>
                     <Button color="primary" onClick={doneHandler}>Yes</Button>
